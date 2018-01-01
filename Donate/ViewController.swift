@@ -11,6 +11,8 @@ import BraintreeDropIn
 import Braintree
 
 class ViewController: UIViewController {
+    
+    let toKinizationKey = "REPLACE_THIS_WITH_YOUR_TOKENIZATION_KEY"
 
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
