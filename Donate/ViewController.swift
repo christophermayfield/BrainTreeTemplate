@@ -43,6 +43,25 @@ class ViewController: UIViewController {
 
     @IBAction func pay(_ sender: Any) {
         
+        let request =  BTDropInRequest()
+        let dropIn = BTDropInController(authorization: toKinizationKey, request: request)
+        { [unowned self] (controller, result, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                
+            } else if (result?.isCancelled == true) {
+                print(message: "Transaction Cancelled")
+                
+            } else if let nonce = result?.paymentMethod?.nonce, let amount = self.amountTextField.text {
+                self.sendRequestPaymentToServer(nonce: nonce, amount: amount)
+            }
+            controller.dismiss(animated: true, completion: nil)
+        }
+        self.present(dropIn!, animated: true, completion: nil)
+    
+    
+    
     }
     
     
@@ -78,5 +97,5 @@ class ViewController: UIViewController {
 
     
     
+    }
 }
-
